@@ -44,6 +44,15 @@
    ```
 
 2. Install dependencies:
+   
+   using virtual environment (optional but recomended)
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+    without virtual environment
    ```bash
    pip install -r requirements.txt
    ```
