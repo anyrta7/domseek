@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 from utils.file_handler import load_domains
+from domain_checker.checker import DomainChecker
 from domain_checker.filters import apply_filters
 
 def parse_arguments():
@@ -9,7 +10,7 @@ def parse_arguments():
     parser.add_argument("-fd", "--filter-domain", type=str, help="comma-separated domain filters (e.g., com,org)")
     parser.add_argument("-ia", "--inactive", action="store_true", help="display inactive domain")
     parser.add_argument("-is", "--ignore-ssl", action="store_true", help="ignore SSL certificate errors")
-    parser.add_argument("-th", "--thread", type=int, default=5, help="number of threads to use (default: %(default)s)")
+    parser.add_argument("-th", "--threads", type=int, default=5, help="number of threads to use (default: %(default)s)")
     parser.add_argument("-tm", "--timeout", type=int, default=10, help="request timeout in seconds (default: %(default)s)")
     parser.add_argument("--retry", type=int, default=3, help="number of retries of each domain (default: %(default)s)")
     
@@ -26,6 +27,13 @@ def main():
     if args.filter_domain:
         filters = args.filter_domain.split(',')
         domains = apply_filters(domains, filters)
+        
+    checker = DomainChecker(valid_status_code, args.timeout, args.ignore_ssl, args.retry)
+    results = checker.check_domains(domains, args.threads)
+    inactive_domains = [domain for domain, status in results.items() if not status]
+    
+    for domain, status in results.items():
+        print(f"[{status}] {domain}")
     
 if __name__ == "__main__":
     main()
