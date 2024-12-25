@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from utils.file_handler import load_domains
 
 def parse_arguments():
     parser = ArgumentParser(prog="domseek", description="Domain Checker")
@@ -16,6 +17,11 @@ def parse_arguments():
 def main():
     args = parse_arguments()
     valid_status_code = list(map(int, args.status_code.split(','))) if args.status_code else [200]
+    
+    domains = []
+    if args.list:
+        domains = load_domains(args.list)
+    print(domains)
     
 if __name__ == "__main__":
     main()
