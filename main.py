@@ -34,6 +34,10 @@ def main():
     
     for domain, status in results.items():
         print(f"[{status}] {domain}")
+        
+    if args.inactive:
+        for domain in inactive_domains:
+            print(f"[INACTIVE] {domain}")
     
 if __name__ == "__main__":
     main()
