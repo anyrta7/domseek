@@ -15,6 +15,7 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
+    valid_status_code = list(map(int, args.status_code.split(','))) if args.status_code else [200]
     
 if __name__ == "__main__":
     main()
