@@ -1,7 +1,10 @@
+from colorama import init, Fore
 from argparse import ArgumentParser
 from utils.file_handler import load_domains
 from domain_checker.checker import DomainChecker
 from domain_checker.filters import apply_filters
+
+init(autoreset=True)
 
 def parse_arguments():
     parser = ArgumentParser(prog="domseek", description="Domain Checker")
@@ -33,11 +36,14 @@ def main():
     inactive_domains = [domain for domain, status in results.items() if not status]
     
     for domain, status in results.items():
-        print(f"[{status}] {domain}")
+        if status:
+            print(f"[{Fore.GREEN}{status}{Fore.RESET}] {domain}")
+        else:
+            print(f"[{Fore.RED}{status}{Fore.RESET}] {domain}")
         
     if args.inactive:
         for domain in inactive_domains:
-            print(f"[INACTIVE] {domain}")
+            print(f"[{Fore.RED}INACTIVE{Fore.RESET}] {domain}")
     
 if __name__ == "__main__":
     main()
