@@ -26,6 +26,7 @@ def main():
     domains = []
     if args.list:
         domains = load_domains(args.list)
+        print(f"[{Fore.LIGHTBLUE_EX}!{Fore.RESET}] Checking {Fore.LIGHTGREEN_EX}{len(domains)}{Fore.RESET} domains in {args.list}")
     
     if args.filter_domain:
         filters = args.filter_domain.split(',')
