@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 from utils.file_handler import load_domains
+from domain_checker.filters import apply_filters
 
 def parse_arguments():
     parser = ArgumentParser(prog="domseek", description="Domain Checker")
@@ -21,7 +22,10 @@ def main():
     domains = []
     if args.list:
         domains = load_domains(args.list)
-    print(domains)
+    
+    if args.filter_domain:
+        filters = args.filter_domain.split(',')
+        domains = apply_filters(domains, filters)
     
 if __name__ == "__main__":
     main()
