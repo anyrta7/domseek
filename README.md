@@ -59,7 +59,7 @@
 
 3. Make the script executable (optional):
    ```bash
-   chmod +x main.py
+   chmod +x domseek.py
    ```
 
 ## Usage
@@ -67,12 +67,12 @@
 ### Basic Usage
 To check domains listed in a file and filter by specific status codes:
 ```bash
-python main.py -l list.txt -sc 200
+python domseek.py -l list.txt -sc 200
 ```
 
 To pipe a list of domains via standard input:
 ```bash
-cat list.txt | python main.py -sc 200
+cat list.txt | python domseek.py -sc 200
 ```
 
 ### Advanced Options
@@ -87,17 +87,17 @@ cat list.txt | python main.py -sc 200
 ### Examples
 1. Check domains and display only those responding with 200 or 403:
    ```bash
-   python main.py -l domains.txt -sc 200,403
+   python domseek.py -l domains.txt -sc 200,403
    ```
 
 2. Filter domains containing specific keywords:
    ```bash
-   python main.py -l domains.txt --filter "example,site"
+   python domseek.py -l domains.txt --filter "example,site"
    ```
 
 3. Process domains with 20 threads:
    ```bash
-   python main.py -l domains.txt -th 20
+   python domseek.py -l domains.txt -th 20
    ```
 
 ## Output Details
@@ -111,7 +111,7 @@ cat list.txt | python main.py -sc 200
 ## Project Structure
 ```
 project_root/
-├── main.py             # Main script
+├── domseek.py             # Main script
 ├── requirements.txt    # Python dependencies
 ├── utils/
 │   └── file_handler.py # File handler 
