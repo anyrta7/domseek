@@ -1,3 +1,4 @@
+import sys
 from colorama import init, Fore
 from argparse import ArgumentParser
 from utils.file_handler import load_domains
@@ -27,6 +28,12 @@ def main():
     if args.list:
         domains = load_domains(args.list)
         print(f"[{Fore.LIGHTBLUE_EX}!{Fore.RESET}] Checking {Fore.LIGHTGREEN_EX}{len(domains)}{Fore.RESET} domains in {args.list}")
+    else:
+        if sys.stdin.isatty():
+            print("Error: No input provided. Use -l or pipe a list through stdin.")
+            sys.exit(1)
+        domains = [line.strip() for line in sys.stdin if line.strip()]
+        print(f"[{Fore.LIGHTBLUE_EX}!{Fore.RESET}] Checking {Fore.LIGHTGREEN_EX}{len(domains)}{Fore.RESET} domains from STDIN")
     
     if args.filter_domain:
         filters = args.filter_domain.split(',')
