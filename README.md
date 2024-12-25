@@ -92,7 +92,7 @@ cat list.txt | python domseek.py -sc 200
 
 2. Filter domains containing specific keywords:
    ```bash
-   python domseek.py -l domains.txt --filter "example,site"
+   python domseek.py -l domains.txt --filter "com,org,net"
    ```
 
 3. Process domains with 20 threads:
