@@ -12,3 +12,9 @@ def parse_arguments():
     parser.add_argument("--retry", type=int, default=3, help="number of retries of each domain (default: %(default)s)")
     
     return parser.parse_args()
+
+def main():
+    args = parse_arguments()
+    
+if __name__ == "__main__":
+    main()
